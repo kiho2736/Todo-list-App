@@ -11,7 +11,7 @@ function TodoList() {
   });
 
   return (
-    <table className="table">
+    <table className="table todoList">
       <thead>
         <tr>
           <th>Title</th>
@@ -20,9 +20,7 @@ function TodoList() {
           <th>Status</th>
         </tr>
       </thead>
-      <tbody>
-        {renderedTodos}
-      </tbody>
+      <tbody>{renderedTodos}</tbody>
     </table>
   );
 }

@@ -1,3 +1,4 @@
+import "./App.css";
 import { useEffect, useContext } from "react";
 import TodosContext from "../context/todos";
 
@@ -12,7 +13,11 @@ function App() {
 
   console.log(todos);
 
-  return <div><TodoList /></div>;
+  return (
+    <div className="container">
+      <TodoList />
+    </div>
+  );
 }
 
 export default App;
