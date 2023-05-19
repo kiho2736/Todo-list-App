@@ -3,7 +3,7 @@
     {
       "title": "New todo - 1",
       "description": "Description of new todo -1.",
-      "due date": "",
+      "dueDate": "",
       "urgency": "urgent",
       "status": "progressing",
       "id": 1
