@@ -19,13 +19,13 @@ function Provider({ children }) {
 
   // Delete a todo by ID
 
-  const restAPIfuncs = {
+  const todoActions = {
     todos,
     fetchTodos,
   };
 
   return (
-    <TodosContext.Provider value={restAPIfuncs}>
+    <TodosContext.Provider value={todoActions}>
       {children}
     </TodosContext.Provider>
   );

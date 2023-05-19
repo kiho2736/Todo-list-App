@@ -3,6 +3,7 @@ import { useEffect, useContext } from "react";
 import TodosContext from "../context/todos";
 
 import TodoList from "./TodoList";
+import TodoActions from "./TodoActions";
 
 function App() {
   const { todos, fetchTodos } = useContext(TodosContext);
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <div className="container">
+      <TodoActions />
       <TodoList />
     </div>
   );
