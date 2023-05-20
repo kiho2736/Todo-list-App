@@ -1,10 +1,13 @@
 import { useContext, useState } from "react";
 import TodosContext from "../context/todos";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 function Modal({ isShow, onClose }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [dueDate, setDueDate] = useState("");
+  const [dueDate, setDueDate] = useState(new Date());
   const [urgency, setUrgency] = useState("low");
   const [status, setStatus] = useState("not-started");
 
@@ -19,9 +22,19 @@ function Modal({ isShow, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    createTodo({ title, description, dueDate: "", urgency, status });
+    let selectedDate =
+      dueDate.getMonth() +
+      1 +
+      "/" +
+      dueDate.getDate() +
+      "/" +
+      dueDate.getFullYear();
+
+    createTodo({ title, description, dueDate: selectedDate, urgency, status });
+
     setTitle("");
     setDescription("");
+    setDueDate(new Date());
     setUrgency("low");
     setStatus("not-started");
     onClose();
@@ -34,6 +47,10 @@ function Modal({ isShow, onClose }) {
 
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
+  };
+
+  const handleDueDateSelect = (date) => {
+    setDueDate(date);
   };
 
   const handleUrgentSelect = (e) => {
@@ -72,16 +89,16 @@ function Modal({ isShow, onClose }) {
               value={description}
               onChange={handleDescriptionChange}
             ></textarea>
-            {/* Date Picker */}
-            <div className="select" value={urgency}>
-              <select onChange={handleUrgentSelect}>
+            <DatePicker selected={dueDate} onSelect={handleDueDateSelect} />
+            <div className="select">
+              <select onChange={handleUrgentSelect} value={urgency}>
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
                 <option value="urgent">Urgent</option>
               </select>
             </div>
             <div className="select" value={status}>
-              <select onChange={handleStatusSelect}>
+              <select value={status} onChange={handleStatusSelect}>
                 <option value="not-started">Not Started</option>
                 <option value="progress">Progressing</option>
                 <option value="done">Done</option>
