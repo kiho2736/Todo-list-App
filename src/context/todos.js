@@ -14,6 +14,12 @@ function Provider({ children }) {
   };
 
   // Create a new todo
+  const createTodo = async (newTodo) => {
+    const res = await axios.post("http://localhost:3001/todos", newTodo);
+
+    const updateTodos = [...todos, res.data];
+    setTodos(updateTodos);
+  };
 
   // Edit a todo
 
@@ -22,6 +28,7 @@ function Provider({ children }) {
   const todoActions = {
     todos,
     fetchTodos,
+    createTodo,
   };
 
   return (
