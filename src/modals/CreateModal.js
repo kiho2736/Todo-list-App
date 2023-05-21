@@ -1,8 +1,9 @@
+import "./CreateModal.css";
+import "react-datepicker/dist/react-datepicker.css";
+
 import { useContext, useState } from "react";
 import TodosContext from "../context/todos";
 import DatePicker from "react-datepicker";
-
-import "react-datepicker/dist/react-datepicker.css";
 
 function CreateModal({ isShow, onClose }) {
   const [title, setTitle] = useState("");
@@ -10,6 +11,8 @@ function CreateModal({ isShow, onClose }) {
   const [dueDate, setDueDate] = useState(new Date());
   const [urgency, setUrgency] = useState("low");
   const [status, setStatus] = useState("not-started");
+
+  const [showWarning, setShowWarning] = useState(false);
 
   const { createTodo } = useContext(TodosContext);
 
@@ -27,18 +30,33 @@ function CreateModal({ isShow, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let selectedDate =
-      dueDate.getMonth() +
-      1 +
-      "/" +
-      dueDate.getDate() +
-      "/" +
-      dueDate.getFullYear();
+    if (!title) {
+      setShowWarning(!showWarning);
+    } else {
+      let selectedDate =
+        dueDate.getMonth() +
+        1 +
+        "/" +
+        dueDate.getDate() +
+        "/" +
+        dueDate.getFullYear();
 
-    createTodo({ title, description, dueDate: selectedDate, urgency, status });
+      createTodo({
+        title,
+        description,
+        dueDate: selectedDate,
+        urgency,
+        status,
+      });
 
-    handleClose();
+      handleClose();
+    }
   };
+
+  // let content;
+  // if (showWarning) {
+  //   content = <WarningModal />;
+  // }
 
   // Tracking states of inputs
   const handleTitleChange = (e) => {
@@ -84,6 +102,10 @@ function CreateModal({ isShow, onClose }) {
               value={title}
               onChange={handleTitleChange}
             />
+            <p className={title ? "warning-msg-hide" : "warning-msg"}>
+              Please fill out title.
+            </p>
+
             <label htmlFor="newDescription">Description</label>
             <textarea
               id="newDescription"
@@ -93,12 +115,14 @@ function CreateModal({ isShow, onClose }) {
               value={description}
               onChange={handleDescriptionChange}
             ></textarea>
+
             <label htmlFor="newDueDate">Due Date</label>
             <DatePicker
               id="newDueDate"
               selected={dueDate}
               onSelect={handleDueDateSelect}
             />
+
             <label>Urgent</label>
             <div className="select">
               <select onChange={handleUrgentSelect} value={urgency}>
@@ -107,6 +131,7 @@ function CreateModal({ isShow, onClose }) {
                 <option value="urgent">Urgent</option>
               </select>
             </div>
+
             <label>Status</label>
             <div className="select" value={status}>
               <select value={status} onChange={handleStatusSelect}>

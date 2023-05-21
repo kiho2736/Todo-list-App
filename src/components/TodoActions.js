@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import CreateModal from "./CreateModal";
+import CreateModal from "../modals/CreateModal";
 
 function TodoActions() {
   const [showCreate, setShowCreate] = useState(false);

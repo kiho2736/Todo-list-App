@@ -1,0 +1,7 @@
+.warning-msg-hide {
+  visibility: hidden;
+}
+
+.warning-msg {
+  color: #d9004c;
+}
