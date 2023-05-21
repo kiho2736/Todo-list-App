@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Modal from "./Modal";
+import CreateModal from "./CreateModal";
 
 function TodoActions() {
   const [showCreate, setShowCreate] = useState(false);
@@ -11,7 +11,7 @@ function TodoActions() {
 
   return (
     <div className="action-container">
-      <Modal isShow={showCreate} onClose={handleToggleClick}/>
+      <CreateModal isShow={showCreate} onClose={handleToggleClick} />
       <button
         className="button is-primary is-outlined"
         onClick={handleToggleClick}

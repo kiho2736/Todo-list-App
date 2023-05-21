@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-function Modal({ isShow, onClose }) {
+function CreateModal({ isShow, onClose }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState(new Date());
@@ -15,6 +15,11 @@ function Modal({ isShow, onClose }) {
 
   // Toggle the create modal
   const handleClose = () => {
+    setTitle("");
+    setDescription("");
+    setDueDate(new Date());
+    setUrgency("low");
+    setStatus("not-started");
     onClose();
   };
 
@@ -32,12 +37,7 @@ function Modal({ isShow, onClose }) {
 
     createTodo({ title, description, dueDate: selectedDate, urgency, status });
 
-    setTitle("");
-    setDescription("");
-    setDueDate(new Date());
-    setUrgency("low");
-    setStatus("not-started");
-    onClose();
+    handleClose();
   };
 
   // Tracking states of inputs
@@ -66,7 +66,7 @@ function Modal({ isShow, onClose }) {
       <div className="modal-background" onClick={handleClose}></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">Create a new todo</p>
+          <p className="modal-card-title">Create Todo</p>
           <button
             className="delete"
             aria-label="close"
@@ -75,21 +75,31 @@ function Modal({ isShow, onClose }) {
         </header>
         <section className="modal-card-body">
           <form onSubmit={handleSubmit}>
+            <label htmlFor="newTitle">Title</label>
             <input
+              id="newTitle"
               className="input"
               type="text"
               placeholder="Title"
               value={title}
               onChange={handleTitleChange}
             />
+            <label htmlFor="newDescription">Description</label>
             <textarea
+              id="newDescription"
               className="textarea"
               placeholder="10 lines of description"
               rows="10"
               value={description}
               onChange={handleDescriptionChange}
             ></textarea>
-            <DatePicker selected={dueDate} onSelect={handleDueDateSelect} />
+            <label htmlFor="newDueDate">Due Date</label>
+            <DatePicker
+              id="newDueDate"
+              selected={dueDate}
+              onSelect={handleDueDateSelect}
+            />
+            <label>Urgent</label>
             <div className="select">
               <select onChange={handleUrgentSelect} value={urgency}>
                 <option value="low">Low</option>
@@ -97,6 +107,7 @@ function Modal({ isShow, onClose }) {
                 <option value="urgent">Urgent</option>
               </select>
             </div>
+            <label>Status</label>
             <div className="select" value={status}>
               <select value={status} onChange={handleStatusSelect}>
                 <option value="not-started">Not Started</option>
@@ -119,4 +130,4 @@ function Modal({ isShow, onClose }) {
   );
 }
 
-export default Modal;
+export default CreateModal;
