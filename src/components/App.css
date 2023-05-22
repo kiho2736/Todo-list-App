@@ -8,3 +8,7 @@
   width: 80vw;
   margin-top: 100px;
 }
+
+.modal-background {
+  background-color: rgba(10, 10, 10, 0.5);
+}

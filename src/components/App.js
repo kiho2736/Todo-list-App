@@ -4,6 +4,7 @@ import TodosContext from "../context/todos";
 
 import TodoList from "./TodoList";
 import TodoActions from "./TodoActions";
+import TodoModal from "../modals/TodoModal";
 
 function App() {
   const { todos, fetchTodos } = useContext(TodosContext);
@@ -12,10 +13,9 @@ function App() {
     fetchTodos();
   }, []);
 
-  console.log(todos);
-
   return (
     <div className="container">
+      <TodoModal />
       <TodoActions />
       <TodoList />
     </div>

@@ -5,6 +5,9 @@ const TodosContext = createContext();
 
 function Provider({ children }) {
   const [todos, setTodos] = useState([]);
+  const [currentTodo, setCurrentTodo] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const [createMode, setCreateMode] = useState(false);
 
   // Get all todos
   const fetchTodos = async () => {
@@ -25,10 +28,21 @@ function Provider({ children }) {
 
   // Delete a todo by ID
 
+  // Toggle the modal
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
   const todoActions = {
     todos,
+    currentTodo,
+    setCurrentTodo,
+    showModal,
+    createMode,
+    setCreateMode,
     fetchTodos,
     createTodo,
+    toggleModal,
   };
 
   return (

@@ -1,22 +1,21 @@
-import { useState } from "react";
-
-import CreateModal from "../modals/CreateModal";
+import { useContext } from "react";
+import TodosContext from "../context/todos";
 
 function TodoActions() {
-  const [showCreate, setShowCreate] = useState(false);
+  const { toggleModal, createMode, setCreateMode } = useContext(TodosContext);
 
-  const handleToggleClick = () => {
-    setShowCreate(!showCreate);
+  const handleNewClick = () => {
+    setCreateMode(!createMode);
+    toggleModal();
   };
 
   return (
     <div className="action-container">
-      <CreateModal isShow={showCreate} onClose={handleToggleClick} />
       <button
         className="button is-primary is-outlined"
-        onClick={handleToggleClick}
+        onClick={handleNewClick}
       >
-        ADD
+        NEW
       </button>
     </div>
   );
