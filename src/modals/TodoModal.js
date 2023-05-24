@@ -7,11 +7,11 @@ import TodoContent from "./TodoContent";
 import CreateMode from "./CreateMode";
 
 function TodoModal() {
-  const { currentTodo, showModal, toggleModal, createMode } =
+  const { currentTodo, showModal, toggleModal, createMode, editMode } =
     useContext(TodosContext);
 
   let form = <TodoContent currentTodo={currentTodo} />;
-  if (createMode) {
+  if (createMode || editMode) {
     form = <CreateMode />;
   }
 

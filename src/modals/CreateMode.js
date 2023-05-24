@@ -1,6 +1,6 @@
 import "react-datepicker/dist/react-datepicker.css";
 
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import TodosContext from "../context/todos";
 import DatePicker from "react-datepicker";
 
@@ -13,8 +13,34 @@ function CreateMode() {
 
   const [showWarning, setShowWarning] = useState(false);
 
-  const { createTodo, createMode, setCreateMode, toggleModal } =
-    useContext(TodosContext);
+  const {
+    currentTodo,
+    createTodo,
+    editTodo,
+    createMode,
+    setCreateMode,
+    editMode,
+    setEditMode,
+    toggleModal,
+  } = useContext(TodosContext);
+
+  useEffect(() => {
+    if (editMode) {
+      setTitle(currentTodo.title);
+      setDescription(currentTodo.description);
+      //   setDueDate(currentTodo.dueDate);
+      setUrgency(currentTodo.urgency);
+      setStatus(currentTodo.status);
+    }
+  }, [editMode]);
+
+  let modalTitle = "Create Todo";
+  let btnName = "Create";
+
+  if (editMode) {
+    modalTitle = "Edit Todo";
+    btnName = "Edit";
+  }
 
   // Toggle the create modal
   const handleClose = () => {
@@ -23,7 +49,8 @@ function CreateMode() {
     setDueDate(new Date());
     setUrgency("low");
     setStatus("not-started");
-    setCreateMode(!createMode);
+    setCreateMode(false);
+    setEditMode(false);
     toggleModal();
   };
 
@@ -42,13 +69,19 @@ function CreateMode() {
         "/" +
         dueDate.getFullYear();
 
-      createTodo({
+      const todoInfo = {
         title,
         description,
         dueDate: selectedDate,
         urgency,
         status,
-      });
+      };
+
+      if (editMode) {
+        editTodo(currentTodo.id, todoInfo);
+      } else {
+        createTodo(todoInfo);
+      }
 
       handleClose();
     }
@@ -78,7 +111,7 @@ function CreateMode() {
   return (
     <div className="modal-card">
       <header className="modal-card-head">
-        <p className="modal-card-title">Create Todo</p>
+        <p className="modal-card-title">{modalTitle}</p>
         <button
           className="delete"
           aria-label="close"
@@ -138,7 +171,7 @@ function CreateMode() {
       </section>
       <footer className="modal-card-foot">
         <button className="button is-success" onClick={handleSubmit}>
-          Create
+          {btnName}
         </button>
         <button className="button" onClick={handleClose}>
           Cancel

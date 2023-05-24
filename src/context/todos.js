@@ -8,6 +8,7 @@ function Provider({ children }) {
   const [currentTodo, setCurrentTodo] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [createMode, setCreateMode] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   // Get all todos
   const fetchTodos = async () => {
@@ -25,6 +26,19 @@ function Provider({ children }) {
   };
 
   // Edit a todo
+  const editTodo = async (id, todo) => {
+    const res = await axios.put("http://localhost:3001/todos/" + id, todo);
+
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, ...res.data };
+      }
+
+      return todo;
+    });
+
+    setTodos(updatedTodos);
+  };
 
   // Delete a todo by ID
 
@@ -40,8 +54,11 @@ function Provider({ children }) {
     showModal,
     createMode,
     setCreateMode,
+    editMode,
+    setEditMode,
     fetchTodos,
     createTodo,
+    editTodo,
     toggleModal,
   };
 

@@ -2,7 +2,11 @@ import { useContext } from "react";
 import TodosContext from "../context/todos";
 
 function TodoContent({ currentTodo }) {
-  const { toggleModal } = useContext(TodosContext);
+  const { editMode, setEditMode, toggleModal } = useContext(TodosContext);
+
+  const openEdit = () => {
+    setEditMode(!editMode);
+  };
 
   return (
     <div className="modal-card">
@@ -27,6 +31,9 @@ function TodoContent({ currentTodo }) {
         </div>
       </section>
       <footer className="modal-card-foot">
+        <button className="button is-success" onClick={openEdit}>
+          Edit
+        </button>
         <button className="button" onClick={toggleModal}>
           Cancel
         </button>
