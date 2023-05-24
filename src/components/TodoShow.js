@@ -14,7 +14,7 @@ function TodoShow({ todo }) {
   return (
     <tr className="todo" onClick={openShowModal}>
       <td>{todo.title}</td>
-      <td>{todo.dueDate}</td>
+      <td>{todo.dueDate.slice(0, 10)}</td>
       <td>{todo.urgency}</td>
       <td>{todo.status}</td>
     </tr>

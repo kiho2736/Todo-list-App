@@ -1,100 +1,28 @@
 {
   "todos": [
     {
-      "title": "edit todo",
-      "description": "123",
-      "dueDate": "5/24/2023",
-      "urgency": "urgent",
-      "status": "progress",
-      "id": 19
-    },
-    {
-      "title": "",
-      "description": "",
-      "dueDate": "5/20/2023",
-      "urgency": "urgent",
-      "status": "not-started",
-      "id": 20
-    },
-    {
-      "title": "",
-      "description": "",
-      "dueDate": "5/20/2023",
-      "urgency": "low",
-      "status": "not-started",
-      "id": 21
-    },
-    {
-      "title": "",
-      "description": "",
-      "dueDate": "5/20/2023",
-      "urgency": "low",
-      "status": "not-started",
-      "id": 22
-    },
-    {
-      "title": "",
-      "description": "",
-      "dueDate": "6/2/2023",
-      "urgency": "urgent",
-      "status": "not-started",
-      "id": 23
-    },
-    {
-      "title": "saf",
-      "description": "afa",
-      "dueDate": "5/31/2023",
-      "urgency": "urgent",
-      "status": "not-started",
-      "id": 24
-    },
-    {
-      "title": "13123",
-      "description": "1231231412",
-      "dueDate": "5/30/2023",
+      "title": "1",
+      "description": "1",
+      "dueDate": "2023-05-25T05:02:42.000Z",
       "urgency": "medium",
       "status": "progress",
-      "id": 25
+      "id": 1
     },
     {
-      "title": "geg",
-      "description": "dsgsgsdf",
-      "dueDate": "5/20/2023",
-      "urgency": "low",
-      "status": "not-started",
-      "id": 26
+      "title": "2",
+      "description": "2",
+      "dueDate": "2023-06-01T05:03:51.000Z",
+      "urgency": "urgent",
+      "status": "done",
+      "id": 2
     },
     {
-      "title": "asdas",
-      "description": "",
-      "dueDate": "5/21/2023",
-      "urgency": "low",
+      "title": "5",
+      "description": "4",
+      "dueDate": "2023-06-29T05:06:29.000Z",
+      "urgency": "urgent",
       "status": "not-started",
-      "id": 27
-    },
-    {
-      "title": "sdgsdg",
-      "description": "",
-      "dueDate": "5/21/2023",
-      "urgency": "low",
-      "status": "not-started",
-      "id": 28
-    },
-    {
-      "title": "asf",
-      "description": "",
-      "dueDate": "5/21/2023",
-      "urgency": "low",
-      "status": "not-started",
-      "id": 29
-    },
-    {
-      "title": "wfef2113123",
-      "description": "1231231245124",
-      "dueDate": "5/22/2023",
-      "urgency": "low",
-      "status": "not-started",
-      "id": 30
+      "id": 3
     }
   ]
 }

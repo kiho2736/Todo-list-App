@@ -13,26 +13,8 @@ function CreateMode() {
 
   const [showWarning, setShowWarning] = useState(false);
 
-  const {
-    currentTodo,
-    createTodo,
-    editTodo,
-    createMode,
-    setCreateMode,
-    editMode,
-    setEditMode,
-    closeModal,
-  } = useContext(TodosContext);
-
-  useEffect(() => {
-    if (editMode) {
-      setTitle(currentTodo.title);
-      setDescription(currentTodo.description);
-      //   setDueDate(currentTodo.dueDate);
-      setUrgency(currentTodo.urgency);
-      setStatus(currentTodo.status);
-    }
-  }, [editMode]);
+  const { currentTodo, createTodo, editTodo, editMode, closeModal } =
+    useContext(TodosContext);
 
   let modalTitle = "Create Todo";
   let btnName = "Create";
@@ -41,6 +23,16 @@ function CreateMode() {
     modalTitle = "Edit Todo";
     btnName = "Edit";
   }
+
+  useEffect(() => {
+    if (editMode) {
+      setTitle(currentTodo.title);
+      setDescription(currentTodo.description);
+      setDueDate(new Date(currentTodo.dueDate));
+      setUrgency(currentTodo.urgency);
+      setStatus(currentTodo.status);
+    }
+  }, [editMode]);
 
   // Toggle the create modal
   const handleClose = () => {
@@ -59,18 +51,10 @@ function CreateMode() {
     if (!title) {
       setShowWarning(!showWarning);
     } else {
-      let selectedDate =
-        dueDate.getMonth() +
-        1 +
-        "/" +
-        dueDate.getDate() +
-        "/" +
-        dueDate.getFullYear();
-
       const todoInfo = {
         title,
         description,
-        dueDate: selectedDate,
+        dueDate,
         urgency,
         status,
       };
