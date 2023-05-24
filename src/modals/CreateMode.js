@@ -13,16 +13,18 @@ function CreateMode() {
 
   const [showWarning, setShowWarning] = useState(false);
 
-  const { currentTodo, createTodo, editTodo, editMode, closeModal } =
-    useContext(TodosContext);
+  const {
+    currentTodo,
+    createTodo,
+    editTodo,
+    editMode,
+    deleteTodo,
+    closeModal,
+  } = useContext(TodosContext);
 
   let modalTitle = "Create Todo";
   let btnName = "Create";
-
-  if (editMode) {
-    modalTitle = "Edit Todo";
-    btnName = "Edit";
-  }
+  let deleteBtn = "";
 
   useEffect(() => {
     if (editMode) {
@@ -69,6 +71,12 @@ function CreateMode() {
     }
   };
 
+  // Delete the current todo
+  const handleDeleteClick = () => {
+    deleteTodo(currentTodo.id);
+    closeModal();
+  };
+
   // Tracking states of inputs
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -89,6 +97,16 @@ function CreateMode() {
   const handleStatusSelect = (e) => {
     setStatus(e.target.value);
   };
+
+  if (editMode) {
+    modalTitle = "Edit Todo";
+    btnName = "Edit";
+    deleteBtn = (
+      <button className="button is-danger" onClick={handleDeleteClick}>
+        Delete
+      </button>
+    );
+  }
 
   return (
     <div className="modal-card">
@@ -155,6 +173,7 @@ function CreateMode() {
         <button className="button is-success" onClick={handleSubmit}>
           {btnName}
         </button>
+        {deleteBtn}
         <button className="button" onClick={handleClose}>
           Cancel
         </button>
