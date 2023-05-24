@@ -7,7 +7,7 @@ import TodoActions from "./TodoActions";
 import TodoModal from "../modals/TodoModal";
 
 function App() {
-  const { todos, fetchTodos } = useContext(TodosContext);
+  const { fetchTodos } = useContext(TodosContext);
 
   useEffect(() => {
     fetchTodos();

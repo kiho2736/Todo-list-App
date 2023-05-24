@@ -7,7 +7,7 @@ import TodoContent from "./TodoContent";
 import CreateMode from "./CreateMode";
 
 function TodoModal() {
-  const { currentTodo, showModal, toggleModal, createMode, editMode } =
+  const { currentTodo, showModal, closeModal, createMode, editMode } =
     useContext(TodosContext);
 
   let form = <TodoContent currentTodo={currentTodo} />;
@@ -17,7 +17,7 @@ function TodoModal() {
 
   return (
     <div className={`modal ${showModal ? "is-active" : ""}`}>
-      <div className="modal-background" onClick={toggleModal}></div>
+      <div className="modal-background" onClick={closeModal}></div>
       {form}
     </div>
   );

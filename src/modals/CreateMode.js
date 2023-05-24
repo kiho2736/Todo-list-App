@@ -21,7 +21,7 @@ function CreateMode() {
     setCreateMode,
     editMode,
     setEditMode,
-    toggleModal,
+    closeModal,
   } = useContext(TodosContext);
 
   useEffect(() => {
@@ -49,9 +49,7 @@ function CreateMode() {
     setDueDate(new Date());
     setUrgency("low");
     setStatus("not-started");
-    setCreateMode(false);
-    setEditMode(false);
-    toggleModal();
+    closeModal();
   };
 
   // Create a new todo

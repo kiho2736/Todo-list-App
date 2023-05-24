@@ -43,8 +43,10 @@ function Provider({ children }) {
   // Delete a todo by ID
 
   // Toggle the modal
-  const toggleModal = () => {
-    setShowModal(!showModal);
+  const closeModal = () => {
+    setShowModal(false);
+    setCreateMode(false);
+    setEditMode(false);
   };
 
   const todoActions = {
@@ -52,6 +54,7 @@ function Provider({ children }) {
     currentTodo,
     setCurrentTodo,
     showModal,
+    setShowModal,
     createMode,
     setCreateMode,
     editMode,
@@ -59,7 +62,7 @@ function Provider({ children }) {
     fetchTodos,
     createTodo,
     editTodo,
-    toggleModal,
+    closeModal,
   };
 
   return (

@@ -4,11 +4,11 @@ import { useContext } from "react";
 import TodosContext from "../context/todos";
 
 function TodoShow({ todo }) {
-  const { toggleModal, setCurrentTodo } = useContext(TodosContext);
+  const { setShowModal, setCurrentTodo } = useContext(TodosContext);
 
   const openShowModal = () => {
     setCurrentTodo(todo);
-    toggleModal();
+    setShowModal(true);
   };
 
   return (

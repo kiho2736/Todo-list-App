@@ -2,11 +2,11 @@ import { useContext } from "react";
 import TodosContext from "../context/todos";
 
 function TodoActions() {
-  const { toggleModal, createMode, setCreateMode } = useContext(TodosContext);
+  const { setShowModal, setCreateMode } = useContext(TodosContext);
 
   const handleNewClick = () => {
-    setCreateMode(!createMode);
-    toggleModal();
+    setCreateMode(true);
+    setShowModal(true);
   };
 
   return (
