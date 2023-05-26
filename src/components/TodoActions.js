@@ -2,7 +2,7 @@ import { useContext } from "react";
 import TodosContext from "../context/todos";
 
 function TodoActions() {
-  const { setShowModal, setCreateMode } =
+  const { setShowModal, setCreateMode, selectedTodos, deleteTodo } =
     useContext(TodosContext);
 
   const handleNewClick = () => {
@@ -11,7 +11,9 @@ function TodoActions() {
   };
 
   const deleteSelectedTodos = () => {
-
+    for (let i = 0; i < selectedTodos.length; i++) {
+      deleteTodo(selectedTodos[i]);
+    }
   };
 
   return (

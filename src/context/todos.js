@@ -45,11 +45,7 @@ function Provider({ children }) {
   const deleteTodo = async (id) => {
     const res = await axios.delete("http://localhost:3001/todos/" + id);
 
-    const updatedTodos = todos.filter((todo) => {
-      return todo.id !== id;
-    });
-
-    setTodos(updatedTodos);
+    await fetchTodos();
   };
 
   // Toggle the modal
