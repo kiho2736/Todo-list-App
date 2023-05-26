@@ -14,6 +14,7 @@ function TodoList() {
     <table className="table todoList">
       <thead>
         <tr>
+          <th></th>
           <th>Title</th>
           <th>Due Date</th>
           <th>Urgency</th>

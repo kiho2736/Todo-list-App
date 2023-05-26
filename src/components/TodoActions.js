@@ -2,11 +2,16 @@ import { useContext } from "react";
 import TodosContext from "../context/todos";
 
 function TodoActions() {
-  const { setShowModal, setCreateMode } = useContext(TodosContext);
+  const { setShowModal, setCreateMode } =
+    useContext(TodosContext);
 
   const handleNewClick = () => {
     setCreateMode(true);
     setShowModal(true);
+  };
+
+  const deleteSelectedTodos = () => {
+
   };
 
   return (
@@ -16,6 +21,12 @@ function TodoActions() {
         onClick={handleNewClick}
       >
         NEW
+      </button>
+      <button
+        className="button is-danger is-outlined"
+        onClick={deleteSelectedTodos}
+      >
+        DELETE
       </button>
     </div>
   );

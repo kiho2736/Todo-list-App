@@ -9,6 +9,7 @@ function Provider({ children }) {
   const [showModal, setShowModal] = useState(false);
   const [createMode, setCreateMode] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [selectedTodos, setSelectedTodos] = useState([]);
 
   // Get all todos
   const fetchTodos = async () => {
@@ -58,6 +59,17 @@ function Provider({ children }) {
     setEditMode(false);
   };
 
+  const changeSelectedTodos = (id) => {
+    if (selectedTodos.indexOf(id) == -1) {
+      setSelectedTodos([...selectedTodos, id]);
+    } else {
+      const updatedTodos = selectedTodos.filter((todo) => {
+        return id !== todo;
+      });
+      setSelectedTodos(updatedTodos);
+    }
+  };
+
   const todoActions = {
     todos,
     currentTodo,
@@ -73,6 +85,8 @@ function Provider({ children }) {
     editTodo,
     deleteTodo,
     closeModal,
+    selectedTodos,
+    changeSelectedTodos,
   };
 
   return (

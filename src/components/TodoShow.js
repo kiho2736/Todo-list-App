@@ -4,19 +4,29 @@ import { useContext } from "react";
 import TodosContext from "../context/todos";
 
 function TodoShow({ todo }) {
-  const { setShowModal, setCurrentTodo } = useContext(TodosContext);
+  const { setShowModal, setCurrentTodo, changeSelectedTodos } =
+    useContext(TodosContext);
 
   const openShowModal = () => {
     setCurrentTodo(todo);
     setShowModal(true);
   };
 
+  const selectTodo = () => {
+    changeSelectedTodos(todo.id);
+  };
+
   return (
-    <tr className="todo" onClick={openShowModal}>
-      <td>{todo.title}</td>
-      <td>{todo.dueDate.slice(0, 10)}</td>
-      <td>{todo.urgency}</td>
-      <td>{todo.status}</td>
+    <tr className="todo">
+      <td>
+        <label className="checkbox">
+          <input type="checkbox" onClick={selectTodo} />
+        </label>
+      </td>
+      <td onClick={openShowModal}>{todo.title}</td>
+      <td onClick={openShowModal}>{todo.dueDate.slice(0, 10)}</td>
+      <td onClick={openShowModal}>{todo.urgency}</td>
+      <td onClick={openShowModal}>{todo.status}</td>
     </tr>
   );
 }
