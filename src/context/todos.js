@@ -11,6 +11,86 @@ function Provider({ children }) {
   const [editMode, setEditMode] = useState(false);
   const [selectedTodos, setSelectedTodos] = useState([]);
 
+  // Sort todos by title in ascending or descending orders
+  const sortTodosByTitle = (des) => {
+    let sortedTodos;
+    if (des) {
+      sortedTodos = todos.slice().sort((a, b) => {
+        if (a.title < b.title) return -1;
+        if (a.title > b.title) return 1;
+        return 0;
+      });
+    } else {
+      sortedTodos = todos.slice().sort((a, b) => {
+        if (a.title < b.title) return 1;
+        if (a.title > b.title) return -1;
+        return 0;
+      });
+    }
+
+    setTodos(sortedTodos);
+  };
+
+    // Sort due date by title in ascending or descending orders
+    const sortTodosByDueDate = (des) => {
+      let sortedTodos;
+      if (des) {
+        sortedTodos = todos.slice().sort((a, b) => {
+          if (a.dueDate < b.dueDate) return -1;
+          if (a.dueDate > b.dueDate) return 1;
+          return 0;
+        });
+      } else {
+        sortedTodos = todos.slice().sort((a, b) => {
+          if (a.dueDate < b.dueDate) return 1;
+          if (a.dueDate > b.dueDate) return -1;
+          return 0;
+        });
+      }
+  
+      setTodos(sortedTodos);
+    };
+
+  // Sort todos by urgency in ascending or descending orders
+  const sortTodosByUrgency = (des) => {
+    let sortedTodos;
+    if (des) {
+      sortedTodos = todos.slice().sort((a, b) => {
+        if (a.urgency < b.urgency) return -1;
+        if (a.urgency > b.urgency) return 1;
+        return 0;
+      });
+    } else {
+      sortedTodos = todos.slice().sort((a, b) => {
+        if (a.urgency < b.urgency) return 1;
+        if (a.urgency > b.urgency) return -1;
+        return 0;
+      });
+    }
+
+    setTodos(sortedTodos);
+  };
+
+  // Sort todos by status in ascending or descending orders
+  const sortTodosByStatus = (des) => {
+    let sortedTodos;
+    if (des) {
+      sortedTodos = todos.slice().sort((a, b) => {
+        if (a.status < b.status) return -1;
+        if (a.status > b.status) return 1;
+        return 0;
+      });
+    } else {
+      sortedTodos = todos.slice().sort((a, b) => {
+        if (a.status < b.status) return 1;
+        if (a.status > b.status) return -1;
+        return 0;
+      });
+    }
+
+    setTodos(sortedTodos);
+  };
+
   // Get all todos
   const fetchTodos = async () => {
     const res = await axios.get("http://localhost:3001/todos");
@@ -68,6 +148,10 @@ function Provider({ children }) {
 
   const todoActions = {
     todos,
+    sortTodosByTitle,
+    sortTodosByDueDate,
+    sortTodosByUrgency,
+    sortTodosByStatus,
     currentTodo,
     setCurrentTodo,
     showModal,
