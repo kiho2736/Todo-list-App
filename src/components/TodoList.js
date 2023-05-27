@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
+
 import { useContext } from "react";
 import TodosContext from "../context/todos";
 
@@ -15,10 +18,30 @@ function TodoList() {
       <thead>
         <tr>
           <th></th>
-          <th>Title</th>
-          <th>Due Date</th>
-          <th>Urgency</th>
-          <th>Status</th>
+          <th>
+            <span>Title</span>
+            <span>
+              <FontAwesomeIcon icon={faArrowUp} />
+            </span>
+          </th>
+          <th>
+            <span>Due Date</span>
+            <span>
+              <FontAwesomeIcon icon={faArrowUp} />
+            </span>
+          </th>
+          <th>
+            <span>Urgency</span>
+            <span>
+              <FontAwesomeIcon icon={faArrowUp} />
+            </span>
+          </th>
+          <th>
+            <span>Status</span>
+            <span>
+              <FontAwesomeIcon icon={faArrowUp} />
+            </span>
+          </th>
         </tr>
       </thead>
       <tbody>{renderedTodos}</tbody>
