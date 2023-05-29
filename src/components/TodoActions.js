@@ -1,7 +1,11 @@
-import { useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { useState, useContext } from "react";
 import TodosContext from "../context/todos";
 
 function TodoActions() {
+  const [openFilterUrgency, setOpenFilterUrgency] = useState(false);
+
   const { setShowModal, setCreateMode, selectedTodos, deleteTodo } =
     useContext(TodosContext);
 
@@ -14,6 +18,10 @@ function TodoActions() {
     for (let i = 0; i < selectedTodos.length; i++) {
       deleteTodo(selectedTodos[i]);
     }
+  };
+
+  const handleOpenFilterUrgency = () => {
+    setOpenFilterUrgency(!openFilterUrgency);
   };
 
   return (
@@ -30,6 +38,36 @@ function TodoActions() {
       >
         DELETE
       </button>
+      <div
+        className={`dropdown ${openFilterUrgency ? "is-active" : ""}`}
+        onClick={handleOpenFilterUrgency}
+      >
+        <div className="dropdown-trigger">
+          <button
+            className="button"
+            aria-haspopup="true"
+            aria-controls="dropdown-menu"
+          >
+            <span>Urgency</span>
+            <span className="icon">
+              <FontAwesomeIcon icon={faAngleDown} />
+            </span>
+          </button>
+        </div>
+        <div className="dropdown-menu" id="dropdown-menu" role="menu">
+          <div className="dropdown-content">
+            <a href="#" className="dropdown-item">
+              LOW
+            </a>
+            <a href="#" className="dropdown-item">
+              MEDIUM
+            </a>
+            <a href="#" className="dropdown-item">
+              URGENT
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
