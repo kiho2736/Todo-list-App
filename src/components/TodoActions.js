@@ -7,8 +7,15 @@ function TodoActions() {
   const [openFilterUrgency, setOpenFilterUrgency] = useState(false);
   const [openFilterStatus, setOpenFilterStatus] = useState(false);
 
-  const { setShowModal, setCreateMode, selectedTodos, deleteTodo } =
-    useContext(TodosContext);
+  const {
+    todos,
+    setTodos,
+    currentTodos,
+    setShowModal,
+    setCreateMode,
+    selectedTodos,
+    deleteTodo,
+  } = useContext(TodosContext);
 
   const handleNewClick = () => {
     setCreateMode(true);
@@ -23,6 +30,35 @@ function TodoActions() {
 
   const handleOpenFilterUrgency = () => {
     setOpenFilterUrgency(!openFilterUrgency);
+  };
+
+  const handleFilterLowUrgency = () => {
+    setTodos(currentTodos);
+    const updatedTodos = todos.filter((todo) => {
+      return todo.urgency === "low";
+    });
+
+    setTodos(updatedTodos);
+  };
+
+  const handleFilterMediumUrgency = () => {
+    setTodos(currentTodos);
+
+    const updatedTodos = todos.filter((todo) => {
+      return todo.urgency === "medium";
+    });
+
+    setTodos(updatedTodos);
+  };
+
+  const handleFilterUrgentUrgency = () => {
+    setTodos(currentTodos);
+
+    const updatedTodos = todos.filter((todo) => {
+      return todo.urgency === "urgent";
+    });
+
+    setTodos(updatedTodos);
   };
 
   const handleOpenFilterStatus = () => {
@@ -61,15 +97,15 @@ function TodoActions() {
         </div>
         <div className="dropdown-menu" id="dropdown-menu" role="menu">
           <div className="dropdown-content">
-            <a href="#" className="dropdown-item">
+            <div className="dropdown-item" onClick={handleFilterLowUrgency}>
               LOW
-            </a>
-            <a href="#" className="dropdown-item">
+            </div>
+            <div className="dropdown-item" onClick={handleFilterMediumUrgency}>
               MEDIUM
-            </a>
-            <a href="#" className="dropdown-item">
+            </div>
+            <div className="dropdown-item" onClick={handleFilterUrgentUrgency}>
               URGENT
-            </a>
+            </div>
           </div>
         </div>
       </div>
@@ -91,15 +127,9 @@ function TodoActions() {
         </div>
         <div className="dropdown-menu" id="dropdown-menu" role="menu">
           <div className="dropdown-content">
-            <a href="#" className="dropdown-item">
-              NOT STARTED
-            </a>
-            <a href="#" className="dropdown-item">
-              PROGRESSING
-            </a>
-            <a href="#" className="dropdown-item">
-              DONE
-            </a>
+            <div className="dropdown-item">NOT STARTED</div>
+            <div className="dropdown-item">PROGRESSING</div>
+            <div className="dropdown-item">DONE</div>
           </div>
         </div>
       </div>

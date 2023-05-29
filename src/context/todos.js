@@ -5,6 +5,7 @@ const TodosContext = createContext();
 
 function Provider({ children }) {
   const [todos, setTodos] = useState([]);
+  const [currentTodos, setCurrentTodos] = useState([]);
   const [currentTodo, setCurrentTodo] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [createMode, setCreateMode] = useState(false);
@@ -31,25 +32,25 @@ function Provider({ children }) {
     setTodos(sortedTodos);
   };
 
-    // Sort due date by title in ascending or descending orders
-    const sortTodosByDueDate = (des) => {
-      let sortedTodos;
-      if (des) {
-        sortedTodos = todos.slice().sort((a, b) => {
-          if (a.dueDate < b.dueDate) return -1;
-          if (a.dueDate > b.dueDate) return 1;
-          return 0;
-        });
-      } else {
-        sortedTodos = todos.slice().sort((a, b) => {
-          if (a.dueDate < b.dueDate) return 1;
-          if (a.dueDate > b.dueDate) return -1;
-          return 0;
-        });
-      }
-  
-      setTodos(sortedTodos);
-    };
+  // Sort due date by title in ascending or descending orders
+  const sortTodosByDueDate = (des) => {
+    let sortedTodos;
+    if (des) {
+      sortedTodos = todos.slice().sort((a, b) => {
+        if (a.dueDate < b.dueDate) return -1;
+        if (a.dueDate > b.dueDate) return 1;
+        return 0;
+      });
+    } else {
+      sortedTodos = todos.slice().sort((a, b) => {
+        if (a.dueDate < b.dueDate) return 1;
+        if (a.dueDate > b.dueDate) return -1;
+        return 0;
+      });
+    }
+
+    setTodos(sortedTodos);
+  };
 
   // Sort todos by urgency in ascending or descending orders
   const sortTodosByUrgency = (des) => {
@@ -96,6 +97,7 @@ function Provider({ children }) {
     const res = await axios.get("http://localhost:3001/todos");
 
     setTodos(res.data);
+    setCurrentTodos([...todos]);
   };
 
   // Create a new todo
@@ -148,6 +150,8 @@ function Provider({ children }) {
 
   const todoActions = {
     todos,
+    setTodos,
+    currentTodos,
     sortTodosByTitle,
     sortTodosByDueDate,
     sortTodosByUrgency,
