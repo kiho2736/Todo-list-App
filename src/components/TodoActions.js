@@ -5,6 +5,7 @@ import TodosContext from "../context/todos";
 
 function TodoActions() {
   const [openFilterUrgency, setOpenFilterUrgency] = useState(false);
+  const [openFilterStatus, setOpenFilterStatus] = useState(false);
 
   const { setShowModal, setCreateMode, selectedTodos, deleteTodo } =
     useContext(TodosContext);
@@ -22,6 +23,10 @@ function TodoActions() {
 
   const handleOpenFilterUrgency = () => {
     setOpenFilterUrgency(!openFilterUrgency);
+  };
+
+  const handleOpenFilterStatus = () => {
+    setOpenFilterStatus(!openFilterStatus);
   };
 
   return (
@@ -64,6 +69,36 @@ function TodoActions() {
             </a>
             <a href="#" className="dropdown-item">
               URGENT
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        className={`dropdown ${openFilterStatus ? "is-active" : ""}`}
+        onClick={handleOpenFilterStatus}
+      >
+        <div className="dropdown-trigger">
+          <button
+            className="button"
+            aria-haspopup="true"
+            aria-controls="dropdown-menu"
+          >
+            <span>Status</span>
+            <span className="icon">
+              <FontAwesomeIcon icon={faAngleDown} />
+            </span>
+          </button>
+        </div>
+        <div className="dropdown-menu" id="dropdown-menu" role="menu">
+          <div className="dropdown-content">
+            <a href="#" className="dropdown-item">
+              NOT STARTED
+            </a>
+            <a href="#" className="dropdown-item">
+              PROGRESSING
+            </a>
+            <a href="#" className="dropdown-item">
+              DONE
             </a>
           </div>
         </div>
