@@ -139,6 +139,29 @@ function TodoActions() {
           </div>
         </div>
       </div>
+      <div
+        className={`dropdown ${openFilterStatus ? "is-active" : ""}`}
+        onClick={handleOpenFilterStatus}
+      >
+        <div className="dropdown-trigger">
+          <button
+            className="button"
+            aria-haspopup="true"
+            aria-controls="dropdown-menu"
+          >
+            <span>10</span>
+            <span className="icon">
+              <FontAwesomeIcon icon={faAngleDown} />
+            </span>
+          </button>
+        </div>
+        <div className="dropdown-menu" id="dropdown-menu" role="menu">
+          <div className="dropdown-content">
+            <div className="dropdown-item">10</div>
+            <div className="dropdown-item">20</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

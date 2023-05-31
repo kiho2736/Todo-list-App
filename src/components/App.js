@@ -14,7 +14,7 @@ function App() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="main-container">
       <TodoModal />
       <TodoActions />
       <TodoList />
