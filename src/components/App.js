@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect, useContext } from "react";
 import TodosContext from "../context/todos";
 
+import Nav from "./Nav";
 import TodoList from "./TodoList";
 import TodoActions from "./TodoActions";
 import TodoModal from "../modals/TodoModal";
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <div className="main-container">
+      <Nav />
       <TodoModal />
       <TodoActions />
       <TodoList />

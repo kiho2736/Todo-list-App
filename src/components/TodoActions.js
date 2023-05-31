@@ -70,8 +70,7 @@ function TodoActions() {
 
   return (
     <div className="action-container">
-      <label htmlFor="">Search</label>
-      <input className="input" type="text" placeholder="Search for..."></input>
+    
       <button
         className="button is-primary is-outlined"
         onClick={handleNewClick}
