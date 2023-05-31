@@ -1,7 +1,10 @@
+import "react-datepicker/dist/react-datepicker.css";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { useState, useContext } from "react";
 import TodosContext from "../context/todos";
+import DatePicker from "react-datepicker";
 
 function TodoActions() {
   const [openFilterUrgency, setOpenFilterUrgency] = useState(false);
@@ -67,6 +70,8 @@ function TodoActions() {
 
   return (
     <div className="action-container">
+      <label htmlFor="">Search</label>
+      <input className="input" type="text" placeholder="Search for..."></input>
       <button
         className="button is-primary is-outlined"
         onClick={handleNewClick}
@@ -79,6 +84,7 @@ function TodoActions() {
       >
         DELETE
       </button>
+      <DatePicker id="newDueDate" selected={new Date()} />
       <div
         className={`dropdown ${openFilterUrgency ? "is-active" : ""}`}
         onClick={handleOpenFilterUrgency}
