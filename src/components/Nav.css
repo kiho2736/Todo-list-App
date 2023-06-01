@@ -1,0 +1,57 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+}
+
+.navbar-left {
+  display: flex;
+  padding-left: 0.5rem;
+}
+
+.navbar-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bar-icon {
+  font-size: 1.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  /* color: #fff;
+  background-color: #3399ff; */
+}
+
+.navbar-links {
+  padding: 0 1rem;
+}
+
+.workspace-title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.navbar-start {
+  font-size: 1.25rem;
+}
+
+.navbar-item {
+  padding: 0.5rem 1.5rem 0.5rem 0rem;
+}
+
+.navbar-menu {
+  flex-grow: 0;
+}
+
+.navbar-search {
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0 !important;
+}
+
+.auth-buttons {
+  padding: 0rem 1.25rem 0 0;
+}

@@ -1,24 +1,21 @@
+import "./Nav.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faRectangleList,
-  faMagnifyingGlass,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function Nav() {
   return (
-    <nav className="navbar" role="navigation" aria-label="main navigation">
-      <div className="navbar-icons">
-        <span className="icon">
-          <FontAwesomeIcon icon={faBars} />
-        </span>
+    <nav
+      className="navbar is-fixed-top"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div className="navbar-left">
+        <div className="navbar-icons">
+          <span className="navbar-icon bar-icon">
+            <FontAwesomeIcon icon={faBars} />
+          </span>
+        </div>
 
-        <span className="icon">
-          <FontAwesomeIcon icon={faRectangleList} />
-        </span>
-      </div>
-
-      <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-links">
           <div className="workspace-title">Workspace Title</div>
           <div className="navbar-start">
@@ -28,7 +25,9 @@ function Nav() {
             <a className="navbar-item">Files</a>
           </div>
         </div>
+      </div>
 
+      <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-search field">
           <p className="control has-icons-left">
             <input className="input" type="password" placeholder="Search" />
@@ -39,7 +38,7 @@ function Nav() {
         </div>
 
         <div className="navbar-end">
-          <div className="navbar-item">
+          <div className="navbar-item auth-buttons">
             <div className="buttons">
               <a className="button is-primary">
                 <strong>Sign up</strong>
