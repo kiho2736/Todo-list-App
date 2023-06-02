@@ -23,7 +23,7 @@ function App() {
         <a className="navbar-item">Calender</a>
         <a className="navbar-item">Files</a>
       </div>
-      <hr className="navbar-hr"/>
+      <hr className="navbar-hr" />
       <TodoModal />
       <TodoActions />
       <TodoList />
