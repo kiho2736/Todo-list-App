@@ -5,7 +5,7 @@ import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 function Nav() {
   return (
     <nav
-      className="navbar is-fixed-top"
+      className="navbar"
       role="navigation"
       aria-label="main navigation"
     >
@@ -16,14 +16,8 @@ function Nav() {
           </span>
         </div>
 
-        <div className="navbar-links">
+        <div className="navbar-workspace">
           <div className="workspace-title">Workspace Title</div>
-          <div className="navbar-start">
-            <a className="navbar-item">List</a>
-            <a className="navbar-item">Board</a>
-            <a className="navbar-item">Calender</a>
-            <a className="navbar-item">Files</a>
-          </div>
         </div>
       </div>
 

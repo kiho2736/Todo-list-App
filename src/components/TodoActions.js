@@ -1,4 +1,5 @@
 import "react-datepicker/dist/react-datepicker.css";
+import "./TodoActions.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
@@ -69,8 +70,7 @@ function TodoActions() {
   };
 
   return (
-    <div className="action-container">
-    
+    <div className="actions-container">
       <button
         className="button is-primary is-outlined"
         onClick={handleNewClick}

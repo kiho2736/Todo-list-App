@@ -1,7 +1,10 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  padding: 1rem 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0;
+  position: sticky;
+  width: 95%;
 }
 
 .navbar-left {
@@ -23,21 +26,16 @@
   background-color: #3399ff; */
 }
 
-.navbar-links {
-  padding: 0 1rem;
+.navbar-workspace {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .workspace-title {
   font-size: 2rem;
   font-weight: 700;
-}
-
-.navbar-start {
-  font-size: 1.25rem;
-}
-
-.navbar-item {
-  padding: 0.5rem 1.5rem 0.5rem 0rem;
+  margin-left: 1.5rem;
 }
 
 .navbar-menu {

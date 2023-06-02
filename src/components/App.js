@@ -17,6 +17,13 @@ function App() {
   return (
     <div className="main-container">
       <Nav />
+      <div className="navbar-links">
+        <a className="navbar-item">List</a>
+        <a className="navbar-item">Board</a>
+        <a className="navbar-item">Calender</a>
+        <a className="navbar-item">Files</a>
+      </div>
+      <hr className="navbar-hr"/>
       <TodoModal />
       <TodoActions />
       <TodoList />
