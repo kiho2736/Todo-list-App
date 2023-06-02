@@ -1,3 +1,7 @@
+.todo > td {
+  border-bottom: 0;
+}
+
 .todo:hover {
   background-color: #e5ccff;
   cursor: pointer;

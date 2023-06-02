@@ -1,3 +1,5 @@
+import "./TodoList.css";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -77,19 +79,19 @@ function TodoList() {
         <tr>
           <th></th>
           <th onClick={handleSortTitle}>
-            <span>Title</span>
+            <span className="column-title">Title</span>
             <span>{titleArrowIcon}</span>
           </th>
           <th onClick={handleSortDueDate}>
-            <span>Due Date</span>
+            <span className="column-title">Due Date</span>
             <span>{dueDateArrowIcon}</span>
           </th>
           <th onClick={handleSortUrgency}>
-            <span>Urgency</span>
+            <span className="column-title">Urgency</span>
             <span>{urgencyArrowIcon}</span>
           </th>
           <th onClick={handleSortStatus}>
-            <span>Status</span>
+            <span className="column-title">Status</span>
             <span>{statusArrowIcon}</span>
           </th>
         </tr>
