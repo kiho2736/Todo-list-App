@@ -16,7 +16,6 @@ function TodoActions() {
   const [openFilterStatus, setOpenFilterStatus] = useState(false);
 
   const {
-    todos,
     setTodos,
     currentTodos,
     setShowModal,
@@ -41,8 +40,7 @@ function TodoActions() {
   };
 
   const handleFilterLowUrgency = () => {
-    setTodos(currentTodos);
-    const updatedTodos = todos.filter((todo) => {
+    const updatedTodos = currentTodos.filter((todo) => {
       return todo.urgency === "low";
     });
 
@@ -50,9 +48,7 @@ function TodoActions() {
   };
 
   const handleFilterMediumUrgency = () => {
-    setTodos(currentTodos);
-
-    const updatedTodos = todos.filter((todo) => {
+    const updatedTodos = currentTodos.filter((todo) => {
       return todo.urgency === "medium";
     });
 
@@ -60,9 +56,7 @@ function TodoActions() {
   };
 
   const handleFilterUrgentUrgency = () => {
-    setTodos(currentTodos);
-
-    const updatedTodos = todos.filter((todo) => {
+    const updatedTodos = currentTodos.filter((todo) => {
       return todo.urgency === "urgent";
     });
 
@@ -92,7 +86,11 @@ function TodoActions() {
 
       <div className="filters-container">
         <div className="filter">
-          <DatePicker id="newDueDate" selected={new Date()} className="datepicker"/>
+          <DatePicker
+            id="newDueDate"
+            selected={new Date()}
+            className="datepicker"
+          />
         </div>
 
         <div

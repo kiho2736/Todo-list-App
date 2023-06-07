@@ -97,7 +97,7 @@ function Provider({ children }) {
     const res = await axios.get("http://localhost:3001/todos");
 
     setTodos(res.data);
-    setCurrentTodos([...todos]);
+    setCurrentTodos(res.data);
   };
 
   // Create a new todo
