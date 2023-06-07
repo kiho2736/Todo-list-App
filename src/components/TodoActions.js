@@ -39,6 +39,7 @@ function TodoActions() {
     setOpenFilterUrgency(!openFilterUrgency);
   };
 
+  // Filter Urgency
   const handleFilterLowUrgency = () => {
     const updatedTodos = currentTodos.filter((todo) => {
       return todo.urgency === "low";
@@ -65,6 +66,31 @@ function TodoActions() {
 
   const handleOpenFilterStatus = () => {
     setOpenFilterStatus(!openFilterStatus);
+  };
+
+  // Filter status
+  const handleFilterNotStartedStatus = () => {
+    const updatedTodos = currentTodos.filter((todo) => {
+      return todo.status === "not-started";
+    });
+
+    setTodos(updatedTodos);
+  };
+
+  const handleFilterProgressingStatus = () => {
+    const updatedTodos = currentTodos.filter((todo) => {
+      return todo.status === "progressing";
+    });
+
+    setTodos(updatedTodos);
+  };
+
+  const handleFilterDoneStatus = () => {
+    const updatedTodos = currentTodos.filter((todo) => {
+      return todo.status === "done";
+    });
+
+    setTodos(updatedTodos);
   };
 
   return (
@@ -148,9 +174,21 @@ function TodoActions() {
           </div>
           <div className="dropdown-menu" id="dropdown-menu" role="menu">
             <div className="dropdown-content">
-              <div className="dropdown-item">NOT STARTED</div>
-              <div className="dropdown-item">PROGRESSING</div>
-              <div className="dropdown-item">DONE</div>
+              <div
+                className="dropdown-item"
+                onClick={handleFilterNotStartedStatus}
+              >
+                NOT STARTED
+              </div>
+              <div
+                className="dropdown-item"
+                onClick={handleFilterProgressingStatus}
+              >
+                PROGRESSING
+              </div>
+              <div className="dropdown-item" onClick={handleFilterDoneStatus}>
+                DONE
+              </div>
             </div>
           </div>
         </div>
