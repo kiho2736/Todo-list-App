@@ -64,6 +64,10 @@ function TodoActions() {
     setTodos(updatedTodos);
   };
 
+  const handleResetFilterUrgent = () => {
+    setTodos(currentTodos);
+  };
+
   const handleOpenFilterStatus = () => {
     setOpenFilterStatus(!openFilterStatus);
   };
@@ -91,6 +95,10 @@ function TodoActions() {
     });
 
     setTodos(updatedTodos);
+  };
+
+  const handleResetStatus = () => {
+    setTodos(currentTodos);
   };
 
   return (
@@ -152,6 +160,10 @@ function TodoActions() {
               >
                 URGENT
               </div>
+              <hr className="dropdown-divider" />
+              <div className="dropdown-item" onClick={handleResetFilterUrgent}>
+                NONE
+              </div>
             </div>
           </div>
         </div>
@@ -188,6 +200,10 @@ function TodoActions() {
               </div>
               <div className="dropdown-item" onClick={handleFilterDoneStatus}>
                 DONE
+              </div>
+              <hr className="dropdown-divider" />
+              <div className="dropdown-item" onClick={handleResetStatus}>
+                NONE
               </div>
             </div>
           </div>
