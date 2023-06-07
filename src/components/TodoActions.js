@@ -232,6 +232,7 @@ function TodoActions() {
             </div>
           </div>
         </div>
+        <button className="button is-primary">Filter</button>
       </div>
     </div>
   );
