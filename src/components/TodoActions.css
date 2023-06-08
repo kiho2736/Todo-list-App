@@ -22,6 +22,10 @@
   margin-right: 0rem;
 }
 
+.dropdown-item {
+  cursor: pointer;
+}
+
 .datepicker {
   padding-bottom: calc(0.75em - 1px);
   padding-left: 1em;

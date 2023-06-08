@@ -7,17 +7,41 @@ import {
   faPlus,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import TodosContext from "../context/todos";
 import DatePicker from "react-datepicker";
 
 function TodoActions() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [urgency, setUrgency] = useState("low");
-  const [status, setStatus] = useState("not-started");
-  const [openFilterUrgency, setOpenFilterUrgency] = useState(false);
-  const [openFilterStatus, setOpenFilterStatus] = useState(false);
+  const [urgency, setUrgency] = useState("none");
+  const [urgencyDropdown, setUrgencyDropdown] = useState("Urgency");
+  const [status, setStatus] = useState("none");
+  const [statusDropdown, setStatusDropdown] = useState("Status");
+
+  useEffect(() => {
+    if (urgency === "low") {
+      setUrgencyDropdown("LOW");
+    } else if (urgency === "medium") {
+      setUrgencyDropdown("MEDIUM");
+    } else if (urgency === "urgent") {
+      setUrgencyDropdown("URGENT");
+    } else if (urgency === "none") {
+      setUrgencyDropdown("Urgency");
+    }
+  }, [urgency]);
+
+  useEffect(() => {
+    if (status === "not-started") {
+      setStatusDropdown("NOT STARTED");
+    } else if (status === "progressing") {
+      setStatusDropdown("PROGRESSING");
+    } else if (status === "done") {
+      setStatusDropdown("DONE");
+    } else if (status === "none") {
+      setStatusDropdown("Status");
+    }
+  }, [status]);
 
   const {
     setTodos,
@@ -37,14 +61,6 @@ function TodoActions() {
     for (let i = 0; i < selectedTodos.length; i++) {
       deleteTodo(selectedTodos[i]);
     }
-  };
-
-  const handleOpenFilterUrgency = () => {
-    setOpenFilterUrgency(!openFilterUrgency);
-  };
-
-  const handleOpenFilterStatus = () => {
-    setOpenFilterStatus(!openFilterStatus);
   };
 
   const handleFilterClick = () => {
@@ -106,17 +122,14 @@ function TodoActions() {
           ></DatePicker>
         </div>
 
-        <div
-          className={`dropdown filter ${openFilterUrgency ? "is-active" : ""}`}
-          onClick={handleOpenFilterUrgency}
-        >
+        <div className="dropdown filter is-hoverable">
           <div className="dropdown-trigger">
             <button
               className="button"
               aria-haspopup="true"
               aria-controls="dropdown-menu"
             >
-              <span>Urgency</span>
+              <span>{urgencyDropdown}</span>
               <span className="icon">
                 <FontAwesomeIcon icon={faAngleDown} />
               </span>
@@ -147,23 +160,20 @@ function TodoActions() {
           </div>
         </div>
 
-        <div
-          className={`dropdown filter ${openFilterStatus ? "is-active" : ""}`}
-          onClick={handleOpenFilterStatus}
-        >
+        <div className="dropdown filter is-hoverable">
           <div className="dropdown-trigger">
             <button
               className="button"
               aria-haspopup="true"
               aria-controls="dropdown-menu"
             >
-              <span>Status</span>
+              <span>{statusDropdown}</span>
               <span className="icon">
                 <FontAwesomeIcon icon={faAngleDown} />
               </span>
             </button>
           </div>
-          <div className="dropdown-menu" id="dropdown-menu" role="menu">
+          <div className="dropdown-menu" id="dropdown-menu2" role="menu">
             <div className="dropdown-content">
               <div
                 className="dropdown-item"
@@ -202,10 +212,7 @@ function TodoActions() {
           </div>
         </div>
 
-        <div
-          className={`dropdown filter ${openFilterStatus ? "is-active" : ""}`}
-          onClick={handleOpenFilterStatus}
-        >
+        <div className="dropdown filter is-hoverable">
           <div className="dropdown-trigger">
             <button
               className="button"
@@ -218,7 +225,7 @@ function TodoActions() {
               </span>
             </button>
           </div>
-          <div className="dropdown-menu" id="dropdown-menu" role="menu">
+          <div className="dropdown-menu" id="dropdown-menu3" role="menu">
             <div className="dropdown-content">
               <div className="dropdown-item">10</div>
               <div className="dropdown-item">20</div>
