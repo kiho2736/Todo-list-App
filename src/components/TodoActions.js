@@ -12,6 +12,10 @@ import TodosContext from "../context/todos";
 import DatePicker from "react-datepicker";
 
 function TodoActions() {
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [urgency, setUrgency] = useState("low");
+  const [status, setStatus] = useState("not-started");
   const [openFilterUrgency, setOpenFilterUrgency] = useState(false);
   const [openFilterStatus, setOpenFilterStatus] = useState(false);
 
@@ -39,66 +43,26 @@ function TodoActions() {
     setOpenFilterUrgency(!openFilterUrgency);
   };
 
-  // Filter Urgency
-  const handleFilterLowUrgency = () => {
-    const updatedTodos = currentTodos.filter((todo) => {
-      return todo.urgency === "low";
-    });
-
-    setTodos(updatedTodos);
-  };
-
-  const handleFilterMediumUrgency = () => {
-    const updatedTodos = currentTodos.filter((todo) => {
-      return todo.urgency === "medium";
-    });
-
-    setTodos(updatedTodos);
-  };
-
-  const handleFilterUrgentUrgency = () => {
-    const updatedTodos = currentTodos.filter((todo) => {
-      return todo.urgency === "urgent";
-    });
-
-    setTodos(updatedTodos);
-  };
-
-  const handleResetFilterUrgent = () => {
-    setTodos(currentTodos);
-  };
-
   const handleOpenFilterStatus = () => {
     setOpenFilterStatus(!openFilterStatus);
   };
 
-  // Filter status
-  const handleFilterNotStartedStatus = () => {
-    const updatedTodos = currentTodos.filter((todo) => {
-      return todo.status === "not-started";
-    });
+  const handleFilterClick = () => {
+    let filterUrgency = currentTodos;
+    if (urgency !== "none") {
+      filterUrgency = currentTodos.filter((todo) => {
+        return todo.urgency === urgency;
+      });
+    }
 
-    setTodos(updatedTodos);
-  };
+    let filterStatus = filterUrgency;
+    if (status !== "none") {
+      filterStatus = filterUrgency.filter((todo) => {
+        return todo.status === status;
+      });
+    }
 
-  const handleFilterProgressingStatus = () => {
-    const updatedTodos = currentTodos.filter((todo) => {
-      return todo.status === "progressing";
-    });
-
-    setTodos(updatedTodos);
-  };
-
-  const handleFilterDoneStatus = () => {
-    const updatedTodos = currentTodos.filter((todo) => {
-      return todo.status === "done";
-    });
-
-    setTodos(updatedTodos);
-  };
-
-  const handleResetStatus = () => {
-    setTodos(currentTodos);
+    setTodos(filterStatus);
   };
 
   return (
@@ -121,10 +85,25 @@ function TodoActions() {
       <div className="filters-container">
         <div className="filter">
           <DatePicker
-            id="newDueDate"
-            selected={new Date()}
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            selectsStart
+            startDate={startDate}
+            endDate={endDate}
+            dateFormat="MM/dd/yyyy"
             className="datepicker"
           />
+          <span className="datepicker-tilde">~</span>
+          <DatePicker
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            selectsEnd
+            startDate={startDate}
+            endDate={endDate}
+            minDate={startDate}
+            dateFormat="MM/dd/yyyy"
+            className="datepicker"
+          ></DatePicker>
         </div>
 
         <div
@@ -145,23 +124,23 @@ function TodoActions() {
           </div>
           <div className="dropdown-menu" id="dropdown-menu" role="menu">
             <div className="dropdown-content">
-              <div className="dropdown-item" onClick={handleFilterLowUrgency}>
+              <div className="dropdown-item" onClick={() => setUrgency("low")}>
                 LOW
               </div>
               <div
                 className="dropdown-item"
-                onClick={handleFilterMediumUrgency}
+                onClick={() => setUrgency("medium")}
               >
                 MEDIUM
               </div>
               <div
                 className="dropdown-item"
-                onClick={handleFilterUrgentUrgency}
+                onClick={() => setUrgency("urgent")}
               >
                 URGENT
               </div>
               <hr className="dropdown-divider" />
-              <div className="dropdown-item" onClick={handleResetFilterUrgent}>
+              <div className="dropdown-item" onClick={() => setUrgency("none")}>
                 NONE
               </div>
             </div>
@@ -188,21 +167,35 @@ function TodoActions() {
             <div className="dropdown-content">
               <div
                 className="dropdown-item"
-                onClick={handleFilterNotStartedStatus}
+                onClick={() => {
+                  setStatus("not-started");
+                }}
               >
                 NOT STARTED
               </div>
               <div
                 className="dropdown-item"
-                onClick={handleFilterProgressingStatus}
+                onClick={() => {
+                  setStatus("progressing");
+                }}
               >
                 PROGRESSING
               </div>
-              <div className="dropdown-item" onClick={handleFilterDoneStatus}>
+              <div
+                className="dropdown-item"
+                onClick={() => {
+                  setStatus("done");
+                }}
+              >
                 DONE
               </div>
               <hr className="dropdown-divider" />
-              <div className="dropdown-item" onClick={handleResetStatus}>
+              <div
+                className="dropdown-item"
+                onClick={() => {
+                  setStatus("none");
+                }}
+              >
                 NONE
               </div>
             </div>
@@ -232,7 +225,9 @@ function TodoActions() {
             </div>
           </div>
         </div>
-        <button className="button is-primary">Filter</button>
+        <button className="button is-primary" onClick={handleFilterClick}>
+          Filter
+        </button>
       </div>
     </div>
   );
