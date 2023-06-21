@@ -24,7 +24,7 @@ function TodoShow({ todo }) {
         </label>
       </td>
       <td onClick={openShowModal}>{todo.title}</td>
-      <td onClick={openShowModal}>{todo.dueDate.slice(0, 10)}</td>
+      <td onClick={openShowModal}>{todo.dueDate}</td>
       <td onClick={openShowModal}>{todo.urgency}</td>
       <td onClick={openShowModal}>{todo.status}</td>
     </tr>

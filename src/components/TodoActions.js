@@ -78,6 +78,8 @@ function TodoActions() {
       });
     }
 
+    // console.log(new Date().toLocaleString("en-US"));
+    console.log(startDate.toLocaleString());
     setTodos(filterStatus);
   };
 
@@ -100,6 +102,7 @@ function TodoActions() {
 
       <div className="filters-container">
         <div className="filter">
+          <span className="datepicker-label">Date: </span>
           <DatePicker
             selected={startDate}
             onChange={(date) => setStartDate(date)}
