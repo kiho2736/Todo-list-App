@@ -78,9 +78,32 @@ function TodoActions() {
       });
     }
 
-    // console.log(new Date().toLocaleString("en-US"));
-    console.log(startDate.toLocaleString());
-    setTodos(filterStatus);
+    const start =
+      startDate.getFullYear() +
+      "-" +
+      (startDate.getMonth() + 1) +
+      "-" +
+      startDate.getDate();
+
+    const end =
+      endDate.getFullYear() +
+      "-" +
+      (endDate.getMonth() + 1) +
+      "-" +
+      endDate.getDate();
+
+    const filterDueDate = [];
+    for (const todo of filterStatus) {
+      const [year, month, date] = todo.dueDate.split("-");
+      if (year >= start.split("-")[0] && year <= end.split("-")[0]) {
+        if (month >= start.split("-")[1] && month <= end.split("-")[1]) {
+          if (date >= start.split("-")[2] && date <= end.split("-")[2])
+            filterDueDate.push(todo);
+        }
+      }
+    }
+
+    setTodos(filterDueDate);
   };
 
   return (
