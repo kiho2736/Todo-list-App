@@ -14,32 +14,40 @@ import DatePicker from "react-datepicker";
 function TodoActions() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [urgency, setUrgency] = useState("none");
+  const [urgency, setUrgency] = useState("reset");
   const [urgencyDropdown, setUrgencyDropdown] = useState("Urgency");
-  const [status, setStatus] = useState("none");
+  const [status, setStatus] = useState("reset");
   const [statusDropdown, setStatusDropdown] = useState("Status");
 
   useEffect(() => {
     if (urgency === "low") {
-      setUrgencyDropdown("LOW");
+      setUrgencyDropdown("Low");
+      handleFilterClick("low", status);
     } else if (urgency === "medium") {
-      setUrgencyDropdown("MEDIUM");
+      setUrgencyDropdown("Medium");
+      handleFilterClick("medium", status);
     } else if (urgency === "urgent") {
-      setUrgencyDropdown("URGENT");
-    } else if (urgency === "none") {
+      setUrgencyDropdown("Urgent");
+      handleFilterClick("urgent", status);
+    } else if (urgency === "reset") {
       setUrgencyDropdown("Urgency");
+      handleFilterClick("reset", status);
     }
   }, [urgency]);
 
   useEffect(() => {
     if (status === "not-started") {
-      setStatusDropdown("NOT STARTED");
+      setStatusDropdown("Not Started");
+      handleFilterClick(urgency, "not-started");
     } else if (status === "progressing") {
-      setStatusDropdown("PROGRESSING");
+      setStatusDropdown("Progressing");
+      handleFilterClick(urgency, "progressing");
     } else if (status === "done") {
-      setStatusDropdown("DONE");
-    } else if (status === "none") {
+      setStatusDropdown("Done");
+      handleFilterClick(urgency, "done");
+    } else if (status === "reset") {
       setStatusDropdown("Status");
+      handleFilterClick(urgency, "reset");
     }
   }, [status]);
 
@@ -63,47 +71,47 @@ function TodoActions() {
     }
   };
 
-  const handleFilterClick = () => {
-    let filterUrgency = currentTodos;
-    if (urgency !== "none") {
-      filterUrgency = currentTodos.filter((todo) => {
-        return todo.urgency === urgency;
+  const handleFilterClick = (selectedUrgency, selectedStatus) => {
+    let filterByUrgency = currentTodos;
+    if (selectedUrgency !== "reset") {
+      filterByUrgency = currentTodos.filter((todo) => {
+        return todo.urgency === selectedUrgency;
       });
     }
 
-    let filterStatus = filterUrgency;
-    if (status !== "none") {
-      filterStatus = filterUrgency.filter((todo) => {
-        return todo.status === status;
+    let filterByStatus = filterByUrgency;
+    if (selectedStatus !== "reset") {
+      filterByStatus = filterByUrgency.filter((todo) => {
+        return todo.status === selectedStatus;
       });
     }
 
-    const start =
-      startDate.getFullYear() +
-      "-" +
-      (startDate.getMonth() + 1) +
-      "-" +
-      startDate.getDate();
+    // const start =
+    //   startDate.getFullYear() +
+    //   "-" +
+    //   (startDate.getMonth() + 1) +
+    //   "-" +
+    //   startDate.getDate();
 
-    const end =
-      endDate.getFullYear() +
-      "-" +
-      (endDate.getMonth() + 1) +
-      "-" +
-      endDate.getDate();
+    // const end =
+    //   endDate.getFullYear() +
+    //   "-" +
+    //   (endDate.getMonth() + 1) +
+    //   "-" +
+    //   endDate.getDate();
 
-    const filterDueDate = [];
-    for (const todo of filterStatus) {
-      const [year, month, date] = todo.dueDate.split("-");
-      if (year >= start.split("-")[0] && year <= end.split("-")[0]) {
-        if (month >= start.split("-")[1] && month <= end.split("-")[1]) {
-          if (date >= start.split("-")[2] && date <= end.split("-")[2])
-            filterDueDate.push(todo);
-        }
-      }
-    }
+    // const filterDueDate = [];
+    // for (const todo of filterByStatus) {
+    //   const [year, month, date] = todo.dueDate.split("-");
+    //   if (year >= start.split("-")[0] && year <= end.split("-")[0]) {
+    //     if (month >= start.split("-")[1] && month <= end.split("-")[1]) {
+    //       if (date >= start.split("-")[2] && date <= end.split("-")[2])
+    //         filterDueDate.push(todo);
+    //     }
+    //   }
+    // }
 
-    setTodos(filterDueDate);
+    setTodos(filterByStatus);
   };
 
   return (
@@ -164,23 +172,26 @@ function TodoActions() {
           <div className="dropdown-menu" id="dropdown-menu" role="menu">
             <div className="dropdown-content">
               <div className="dropdown-item" onClick={() => setUrgency("low")}>
-                LOW
+                Low
               </div>
               <div
                 className="dropdown-item"
                 onClick={() => setUrgency("medium")}
               >
-                MEDIUM
+                Medium
               </div>
               <div
                 className="dropdown-item"
                 onClick={() => setUrgency("urgent")}
               >
-                URGENT
+                Urgent
               </div>
               <hr className="dropdown-divider" />
-              <div className="dropdown-item" onClick={() => setUrgency("none")}>
-                NONE
+              <div
+                className="dropdown-item"
+                onClick={() => setUrgency("reset")}
+              >
+                Reset
               </div>
             </div>
           </div>
@@ -207,7 +218,7 @@ function TodoActions() {
                   setStatus("not-started");
                 }}
               >
-                NOT STARTED
+                Not Started
               </div>
               <div
                 className="dropdown-item"
@@ -215,7 +226,7 @@ function TodoActions() {
                   setStatus("progressing");
                 }}
               >
-                PROGRESSING
+                Progressing
               </div>
               <div
                 className="dropdown-item"
@@ -223,16 +234,16 @@ function TodoActions() {
                   setStatus("done");
                 }}
               >
-                DONE
+                Done
               </div>
               <hr className="dropdown-divider" />
               <div
                 className="dropdown-item"
                 onClick={() => {
-                  setStatus("none");
+                  setStatus("reset");
                 }}
               >
-                NONE
+                Reset
               </div>
             </div>
           </div>
@@ -258,9 +269,6 @@ function TodoActions() {
             </div>
           </div>
         </div>
-        <button className="button is-primary" onClick={handleFilterClick}>
-          Filter
-        </button>
       </div>
     </div>
   );
