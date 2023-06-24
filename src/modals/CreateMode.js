@@ -50,20 +50,13 @@ function CreateMode() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const convertedDueDate =
-      dueDate.getFullYear() +
-      "-" +
-      (dueDate.getMonth() + 1) +
-      "-" +
-      dueDate.getDate();
-
     if (!title) {
       setShowWarning(!showWarning);
     } else {
       const todoInfo = {
         title,
         description,
-        dueDate: convertedDueDate,
+        dueDate,
         urgency,
         status,
       };

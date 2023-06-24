@@ -12,42 +12,46 @@ import TodosContext from "../context/todos";
 import DatePicker from "react-datepicker";
 
 function TodoActions() {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
   const [urgency, setUrgency] = useState("reset");
   const [urgencyDropdown, setUrgencyDropdown] = useState("Urgency");
   const [status, setStatus] = useState("reset");
   const [statusDropdown, setStatusDropdown] = useState("Status");
 
   useEffect(() => {
+    handleFilterClick(urgency, status, startDate, endDate);
+  }, [startDate, endDate]);
+
+  useEffect(() => {
     if (urgency === "low") {
       setUrgencyDropdown("Low");
-      handleFilterClick("low", status);
+      handleFilterClick("low", status, startDate, endDate);
     } else if (urgency === "medium") {
       setUrgencyDropdown("Medium");
-      handleFilterClick("medium", status);
+      handleFilterClick("medium", status, startDate, endDate);
     } else if (urgency === "urgent") {
       setUrgencyDropdown("Urgent");
-      handleFilterClick("urgent", status);
+      handleFilterClick("urgent", status, startDate, endDate);
     } else if (urgency === "reset") {
       setUrgencyDropdown("Urgency");
-      handleFilterClick("reset", status);
+      handleFilterClick("reset", status, startDate, endDate);
     }
   }, [urgency]);
 
   useEffect(() => {
     if (status === "not-started") {
       setStatusDropdown("Not Started");
-      handleFilterClick(urgency, "not-started");
+      handleFilterClick(urgency, "not-started", startDate, endDate);
     } else if (status === "progressing") {
       setStatusDropdown("Progressing");
-      handleFilterClick(urgency, "progressing");
+      handleFilterClick(urgency, "progressing", startDate, endDate);
     } else if (status === "done") {
       setStatusDropdown("Done");
-      handleFilterClick(urgency, "done");
+      handleFilterClick(urgency, "done", startDate, endDate);
     } else if (status === "reset") {
       setStatusDropdown("Status");
-      handleFilterClick(urgency, "reset");
+      handleFilterClick(urgency, "reset", startDate, endDate);
     }
   }, [status]);
 
@@ -71,7 +75,12 @@ function TodoActions() {
     }
   };
 
-  const handleFilterClick = (selectedUrgency, selectedStatus) => {
+  const handleFilterClick = (
+    selectedUrgency,
+    selectedStatus,
+    selectedStart,
+    selectedEnd
+  ) => {
     let filterByUrgency = currentTodos;
     if (selectedUrgency !== "reset") {
       filterByUrgency = currentTodos.filter((todo) => {
@@ -86,32 +95,30 @@ function TodoActions() {
       });
     }
 
-    // const start =
-    //   startDate.getFullYear() +
-    //   "-" +
-    //   (startDate.getMonth() + 1) +
-    //   "-" +
-    //   startDate.getDate();
+    const filterDueDate = [];
 
-    // const end =
-    //   endDate.getFullYear() +
-    //   "-" +
-    //   (endDate.getMonth() + 1) +
-    //   "-" +
-    //   endDate.getDate();
+    if (!selectedStart && !selectedEnd) {
+      for (const todo of filterByStatus) {
+        filterDueDate.push(todo);
+      }
+    }
 
-    // const filterDueDate = [];
-    // for (const todo of filterByStatus) {
-    //   const [year, month, date] = todo.dueDate.split("-");
-    //   if (year >= start.split("-")[0] && year <= end.split("-")[0]) {
-    //     if (month >= start.split("-")[1] && month <= end.split("-")[1]) {
-    //       if (date >= start.split("-")[2] && date <= end.split("-")[2])
-    //         filterDueDate.push(todo);
-    //     }
-    //   }
-    // }
+    if (selectedStart) {
+      for (const todo of filterByStatus) {
+        if (+selectedStart <= new Date(todo.dueDate).getTime()) {
+          filterDueDate.push(todo);
+        }
+      }
+    }
 
-    setTodos(filterByStatus);
+    if (selectedEnd) {
+      const result = filterDueDate.filter((todo) => {
+        return new Date(todo.dueDate).getTime() <= +selectedEnd;
+      });
+      setTodos(result);
+    } else {
+      setTodos(filterDueDate);
+    }
   };
 
   return (
@@ -133,27 +140,17 @@ function TodoActions() {
 
       <div className="filters-container">
         <div className="filter">
-          <span className="datepicker-label">Date: </span>
           <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            selectsStart
+            selectsRange={true}
             startDate={startDate}
             endDate={endDate}
-            dateFormat="MM/dd/yyyy"
+            onChange={(update) => {
+              setDateRange(update);
+            }}
+            isClearable={true}
             className="datepicker"
+            placeholderText="Date Range"
           />
-          <span className="datepicker-tilde">~</span>
-          <DatePicker
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            selectsEnd
-            startDate={startDate}
-            endDate={endDate}
-            minDate={startDate}
-            dateFormat="MM/dd/yyyy"
-            className="datepicker"
-          ></DatePicker>
         </div>
 
         <div className="dropdown filter is-hoverable">
